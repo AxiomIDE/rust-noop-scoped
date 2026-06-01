@@ -82,9 +82,13 @@ mod tests {
         let ax = test_context();
         let input = NoopInput { example_string: "hello".to_string(), example_int: 7 };
         let result = noop_agent(&ax, input).expect("noop_agent should succeed");
-        // Field mapping: the string echoes through unchanged (catches a node that
-        // drops or swaps fields).
-        assert_eq!(result.example_string, "hello");
+        // Memory fallback (ADR-002): the mock context uses NoopAgent, so every
+        // ax.agent().memory() call returns empty WITHOUT erroring — append is a
+        // no-op, history.last() and search() yield empty vecs. The string encodes
+        // those counts, so this asserts the node tolerates an unconfigured memory
+        // proxy (catches a node that unwraps/expects on empty memory, and catches
+        // the bridge surfacing an error on the noop path).
+        assert_eq!(result.example_string, "mem-ok turns=0 hits=0");
         // Reflection wiring: the mock's EmptyFlow exposes 0 nodes, so the int is
         // unchanged (catches reflection().flow().nodes() panicking or being wired
         // to the wrong collection).
