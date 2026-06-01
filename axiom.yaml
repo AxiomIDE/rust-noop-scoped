@@ -1,4 +1,4 @@
-name: axiomide/rust-noop-scoped
+name: axiom-official/rust-noop-scoped
 version: 0.1.0
 language: rust
 nodes:

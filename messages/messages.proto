@@ -17,7 +17,7 @@
 
 syntax = "proto3";
 
-package axiomide.rust_noop_scoped;
+package axiom_official.rust_noop_scoped;
 
 // HINTS — delete this block when done ──────────────────────────────────────────────
 // Scalar types:  string · int32 · int64 · uint32 · uint64 · float · double · bool · bytes
