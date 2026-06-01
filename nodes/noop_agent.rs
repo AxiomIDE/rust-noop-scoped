@@ -23,10 +23,12 @@ pub fn noop_agent(
     let node_count = ax.reflection().flow().nodes().len() as i32;
 
     // ── Live memory round-trip (ADR-002) ────────────────────────────────────
-    // The session id comes from the typed input (never inferred). Append a
-    // turn, read the history back, and run a semantic search — each call
-    // crosses the async→sync bridge into the sidecar memory proxy. Errors
-    // propagate as a node failure so a broken bridge is loudly visible.
+    // The session id comes from the typed input (never inferred). Append a turn
+    // and read the history back — each call crosses the async→sync bridge
+    // (block_in_place) into the sidecar memory proxy. These are pure episodic
+    // operations (no embedding), so the round-trip is independent of any
+    // embedding-provider configuration. Errors propagate as a node failure so a
+    // broken bridge is loudly visible.
     let session_id = if input.example_string.is_empty() {
         "rust-mem-probe".to_string()
     } else {
@@ -38,12 +40,12 @@ pub fn noop_agent(
         .history()
         .append("user", &format!("probe input={}", input.example_int))?;
     let turns = session.history().last(10)?;
-    let hits = session.search("probe", 5)?;
 
     // Encode the round-trip outcome so it is observable end-to-end: the string
-    // reports the turn/search counts, the int folds in the reflected node count.
+    // reports the turn count read back (>=1 once the appended turn lands), the
+    // int folds in the reflected node count.
     Ok(NoopOutput {
-        example_string: format!("mem-ok turns={} hits={}", turns.len(), hits.len()),
+        example_string: format!("mem-ok turns={}", turns.len()),
         example_int: input.example_int + node_count,
     })
 }
