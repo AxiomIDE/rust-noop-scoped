@@ -1,0 +1,52 @@
+// This file defines the data contracts (messages) for your Axiom package.
+// Every node's --input and --output refers to a message defined here.
+//
+// Run `axiom create message <Name>` to scaffold a new message below.
+// Run `axiom generate` to compile these definitions into language bindings in gen/.
+//
+// DOCUMENTATION
+//   Comments written directly above a message or field declaration are extracted
+//   automatically at publish time and shown in the Axiom registry as documentation.
+//   Write your descriptions there — no separate doc files needed.
+//
+//   Leading comment  (no blank line before the declaration) → registry description ✓
+//   Detached comment (blank line before the declaration)    → ignored by registry  ✗
+//
+// This file is yours to edit. Axiom only appends new message blocks — it never
+// overwrites or removes content you have written.
+
+syntax = "proto3";
+
+package axiomide.rust_noop_scoped;
+
+// HINTS — delete this block when done ──────────────────────────────────────────────
+// Scalar types:  string · int32 · int64 · uint32 · uint64 · float · double · bool · bytes
+// Lists:         repeated string tags = 3;
+// Optional:      optional string note = 4;
+// Other message: AnotherMessage other = 5;   (any message defined in this file — no import needed)
+// Field numbers must be unique within this message and never reused once published.
+// Numbers 1–15 encode in 1 byte on the wire — prefer them for your most common fields.
+
+// Describe what NoopInput represents — this becomes its description in the Axiom registry
+// so other users browsing the marketplace know what data this message carries.
+// Example: "A request to place a new order. Contains the customer ID and a list of items."
+message NoopInput {
+  string example_string = 1; // Replace: describe this field here
+  int32  example_int    = 2; // Replace: describe this field — remove both examples when ready
+}
+
+// HINTS — delete this block when done ──────────────────────────────────────────────
+// Scalar types:  string · int32 · int64 · uint32 · uint64 · float · double · bool · bytes
+// Lists:         repeated string tags = 3;
+// Optional:      optional string note = 4;
+// Other message: AnotherMessage other = 5;   (any message defined in this file — no import needed)
+// Field numbers must be unique within this message and never reused once published.
+// Numbers 1–15 encode in 1 byte on the wire — prefer them for your most common fields.
+
+// Describe what NoopOutput represents — this becomes its description in the Axiom registry
+// so other users browsing the marketplace know what data this message carries.
+// Example: "A request to place a new order. Contains the customer ID and a list of items."
+message NoopOutput {
+  string example_string = 1; // Replace: describe this field here
+  int32  example_int    = 2; // Replace: describe this field — remove both examples when ready
+}

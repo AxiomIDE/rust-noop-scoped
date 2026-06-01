@@ -1,0 +1,7 @@
+name: axiomide/rust-noop-scoped
+version: 0.1.0
+language: rust
+nodes:
+    - name: NoopAgent
+      input: NoopInput
+      output: NoopOutput
